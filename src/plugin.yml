@@ -1,5 +1,5 @@
 name: MineMail
-main: me.PhysX.PSMail
+main: com.alta189.minemail.MineMail
 version: 1.12
 authors: [PhysX, alta189]
 commands:
