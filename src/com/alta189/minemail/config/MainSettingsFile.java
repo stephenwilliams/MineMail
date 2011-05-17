@@ -16,13 +16,14 @@ public class MainSettingsFile {
 	private MineMail plugin;
 	public String fileName = "settings.properties";
 	public File file;
+	@SuppressWarnings("unused")
 	private HashMap<String,String> FileContents = new HashMap<String,String>();
 	
 	//Declare Settings\\
-	Integer primaryColor = 1;
-	Integer secondaryColor = 2;
-	Integer headerColor = 3;
-	Integer errorColor = 4;
+	public Integer primaryColor = 1;
+	public Integer secondaryColor = 2;
+	public Integer headerColor = 3;
+	public Integer errorColor = 4;
 	
 	
 	public MainSettingsFile(MineMail instance) {

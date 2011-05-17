@@ -20,8 +20,7 @@ public class MineMailPlayerListener extends PlayerListener{
 		if (unRead >= 1) {
 			player.sendMessage(ChatColor.GREEN + "MineMail - You have " + ChatColor.RED + unRead + ChatColor.GREEN + " new messages.");
 		} else {
-			player.sendMessage(ChatColor.GREEN
-					+ "MineMail - You have no new mail.");
+			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - You have no new mail.", player);
 		}
 		
 	}

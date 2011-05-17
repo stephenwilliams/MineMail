@@ -1,6 +1,7 @@
 package com.alta189.minemail.addons;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class MessageFormatter {
 	private AddonManager manageAddon;
@@ -64,5 +65,42 @@ public class MessageFormatter {
 		}
 		
 		return result;
+	}
+	
+	public void formatAndSend(String msg, Player player) {
+//		String[] split = msg.split(" ");
+	    String message = msg;
+	    
+	    if (message.contains("<header>")) {
+	    	message = message.replaceAll("<header>", convertColorID(this.manageAddon.plugin.config.settingsFile.headerColor).toString());
+	    }
+	    if (message.contains("<error>")) {
+	    	message = message.replaceAll("<error>", convertColorID(this.manageAddon.plugin.config.settingsFile.errorColor).toString());
+	    }
+	    if (message.contains("<c1>")) {
+	    	message = message.replaceAll("<c1>", convertColorID(this.manageAddon.plugin.config.settingsFile.primaryColor).toString());
+	    }
+	    if (message.contains("<c2")) {
+	    	message = message.replaceAll("<c2>", convertColorID(this.manageAddon.plugin.config.settingsFile.secondaryColor).toString());
+	    }
+	    
+	    /*for (String word : split) {
+	        if (word.equalsIgnoreCase("<header>")) {
+	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.headerColor).toString();
+	        } else if (word.equalsIgnoreCase("<c1>")) {
+	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.primaryColor).toString();
+	        } else if (word.equalsIgnoreCase("<c2>")) {
+	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.secondaryColor).toString();
+	        } else if (word.equalsIgnoreCase("<e>")) {
+	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.errorColor).toString();
+	        }
+	        message = message + word + " ";
+	    }*/
+	    
+	    for (Player check : this.manageAddon.plugin.getServer().getOnlinePlayers()) {
+	    	if (check.getName() == player.getName()) {
+	    		player.sendMessage(message);
+	    	}
+	    }
 	}
 }

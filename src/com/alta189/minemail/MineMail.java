@@ -7,11 +7,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.alta189.minemail.addons.AddonManager;
 import com.alta189.minemail.command.CommandHandler;
 import com.alta189.minemail.config.ConfigCore;
+import com.alta189.minemail.listeners.MineMailPlayerListener;
 import com.alta189.sqllitelib.sqlCore;
 
 public class MineMail extends JavaPlugin {
@@ -29,6 +32,9 @@ public class MineMail extends JavaPlugin {
 	public MailServer mmServer = new MailServer(this);
 	public ConfigCore config = new ConfigCore(this);
 	
+	//Declare all of the Listeners\\
+	public MineMailPlayerListener pListener = new MineMailPlayerListener(this);
+	
 	//Declare any other variables\\
 	public Boolean ScheduledWipe = false;
 	public int DelayWipeTime = 60; //Time in seconds to delay the wipe
@@ -42,7 +48,19 @@ public class MineMail extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		// TODO Auto-generated method stub \\
-		config.initialize();
+		createPluginFolder();
+		
+		this.dbManage = new sqlCore(this.log, this.logPrefix, "mail", pFolder.getPath());
+		
+		this.dbManage.initialize();
+		
+		if (!this.dbManage.checkTable("mails")) {
+			String query1 = "CREATE  TABLE mails ( 'id' INTEGER PRIMARY KEY,  'sender' VARCHAR(80) NOT NULL ,  'receiver' VARCHAR(80) NOT NULL ,  'message' TEXT NOT NULL ,  'read' INT NOT NULL DEFAULT 0);";
+			dbManage.createTable(query1);
+		}
+		
+		PluginManager pm = this.getServer().getPluginManager();
+		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
 	}
 	
 	//Command Executer\\
@@ -110,7 +128,7 @@ public class MineMail extends JavaPlugin {
 	public void notifyReceiver(String playername) { //This is an easy way to notify the player when he gets a message
 		Player receiver = this.getPlayer(playername);
 		if (receiver != null) {
-			receiver.sendMessage(ChatColor.GREEN + "MineMail - You got a message");
+			addons.msgFormat.formatAndSend("MineMail - You got a message", receiver);
 		}
 	}
 }
