@@ -1,0 +1,8 @@
+name: MineMail
+main: me.PhysX.PSMail
+version: 1.12
+authors: [PhysX, alta189]
+commands:
+  mail:
+    description: Some description here
+    usage:
