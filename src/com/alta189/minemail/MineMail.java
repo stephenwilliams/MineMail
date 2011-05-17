@@ -25,6 +25,7 @@ public class MineMail extends JavaPlugin {
 	public sqlCore dbManage;
 	public PermissionsHandler PermManager = new PermissionsHandler(this);
 	public CommandHandler command = new CommandHandler(this);
+	public MailServer mmServer = new MailServer(this);
 	
 	//Declare any other variables\\
 	public Boolean ScheduledWipe = false;
