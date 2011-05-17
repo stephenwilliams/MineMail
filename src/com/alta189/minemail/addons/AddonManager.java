@@ -7,6 +7,7 @@ public class AddonManager {
 	
 	//Declare any addons here \\
 	public PermissionsHandler PermManager = new PermissionsHandler(this);
+	public MessageFormatter msgFormat = new MessageFormatter(this);
 	
 	public AddonManager(MineMail instance) {
 		this.plugin = instance;
