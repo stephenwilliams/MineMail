@@ -84,19 +84,6 @@ public class MessageFormatter {
 	    	message = message.replaceAll("<c2>", convertColorID(this.manageAddon.plugin.config.settingsFile.secondaryColor).toString());
 	    }
 	    
-	    /*for (String word : split) {
-	        if (word.equalsIgnoreCase("<header>")) {
-	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.headerColor).toString();
-	        } else if (word.equalsIgnoreCase("<c1>")) {
-	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.primaryColor).toString();
-	        } else if (word.equalsIgnoreCase("<c2>")) {
-	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.secondaryColor).toString();
-	        } else if (word.equalsIgnoreCase("<e>")) {
-	        	word = convertColorID(this.manageAddon.plugin.config.settingsFile.errorColor).toString();
-	        }
-	        message = message + word + " ";
-	    }*/
-	    
 	    for (Player check : this.manageAddon.plugin.getServer().getOnlinePlayers()) {
 	    	if (check.getName() == player.getName()) {
 	    		player.sendMessage(message);
