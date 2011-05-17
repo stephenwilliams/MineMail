@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.alta189.minemail.addons.PermissionsHandler;
 import com.alta189.minemail.command.CommandHandler;
+import com.alta189.minemail.config.ConfigCore;
 import com.alta189.sqllitelib.sqlCore;
 
 public class MineMail extends JavaPlugin {
@@ -26,6 +27,7 @@ public class MineMail extends JavaPlugin {
 	public PermissionsHandler PermManager = new PermissionsHandler(this);
 	public CommandHandler command = new CommandHandler(this);
 	public MailServer mmServer = new MailServer(this);
+	public ConfigCore config = new ConfigCore(this);
 	
 	//Declare any other variables\\
 	public Boolean ScheduledWipe = false;
@@ -40,7 +42,7 @@ public class MineMail extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		// TODO Auto-generated method stub
-		
+		config.initialize();
 	}
 	
 	//Command Executer\\
