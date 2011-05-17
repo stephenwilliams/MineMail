@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.alta189.minemail.addons.PermissionsHandler;
+import com.alta189.minemail.addons.AddonManager;
 import com.alta189.minemail.command.CommandHandler;
 import com.alta189.minemail.config.ConfigCore;
 import com.alta189.sqllitelib.sqlCore;
@@ -24,7 +24,7 @@ public class MineMail extends JavaPlugin {
 	
 	//Declare all of the Handlers\\
 	public sqlCore dbManage;
-	public PermissionsHandler PermManager = new PermissionsHandler(this);
+	public AddonManager addons = new AddonManager(this);
 	public CommandHandler command = new CommandHandler(this);
 	public MailServer mmServer = new MailServer(this);
 	public ConfigCore config = new ConfigCore(this);
@@ -35,13 +35,13 @@ public class MineMail extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub \\
 		
 	}
 	
 	@Override
 	public void onEnable() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub \\
 		config.initialize();
 	}
 	
@@ -75,12 +75,12 @@ public class MineMail extends JavaPlugin {
 	public Boolean isAdmin(Player player, String type) { //Handles Permissions\OP access to commands
 		if (type.contains("/")) {
 			for (String subType : type.split("/")) {
-				if (player.isOp() || PermManager.hasPermissions(player, "admin") || PermManager.hasPermissions(player, subType)) {
+				if (player.isOp() || this.addons.PermManager.hasPermissions(player, "admin") || this.addons.PermManager.hasPermissions(player, subType)) {
 					return true;
 				}
 			}
 		} else {
-			if (player.isOp() || PermManager.hasPermissions(player, "admin") || PermManager.hasPermissions(player, type)) {
+			if (player.isOp() || this.addons.PermManager.hasPermissions(player, "admin") || this.addons.PermManager.hasPermissions(player, type)) {
 				return true;
 			}
 		}

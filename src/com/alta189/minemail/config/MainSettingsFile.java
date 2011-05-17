@@ -18,6 +18,13 @@ public class MainSettingsFile {
 	public File file;
 	private HashMap<String,String> FileContents = new HashMap<String,String>();
 	
+	//Declare Settings\\
+	Integer primaryColor = 1;
+	Integer secondaryColor = 2;
+	Integer headerColor = 3;
+	Integer errorColor = 4;
+	
+	
 	public MainSettingsFile(MineMail instance) {
 		this.plugin = instance;
 	}

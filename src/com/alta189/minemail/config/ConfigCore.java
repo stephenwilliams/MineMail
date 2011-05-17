@@ -16,7 +16,7 @@ public class ConfigCore {
 	}
 	
 	public void initialize() { //Initializes all files instead of one
-		settingsFile.create();
+		settingsFile.load(false);
 	}
 	
 	public void delete() { //Delete all file

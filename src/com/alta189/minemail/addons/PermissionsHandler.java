@@ -5,25 +5,24 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 
-import com.alta189.minemail.MineMail;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class PermissionsHandler {
-	private MineMail plugin;
+	private AddonManager manageAddon;
 	private static PermissionHandler Permissions = null;
 	public Boolean enablePermissions = false;
 	
-	public PermissionsHandler(MineMail instance) {
-		this.plugin = instance;
+	public PermissionsHandler(AddonManager instance) {
+		this.manageAddon = instance;
 	}
 	
 
 	public void setupPermissions()
 	  {
-	    Plugin perms = plugin.getServer().getPluginManager().getPlugin("Permissions");
+	    Plugin perms = manageAddon.plugin.getServer().getPluginManager().getPlugin("Permissions");
 	    if (perms == null) {
-	    	plugin.log.info(plugin.logPrefix + "No Permissions detected.");
+	    	manageAddon.plugin.log.info(manageAddon.plugin.logPrefix + "No Permissions detected.");
 	    	return;
 	    }
 	    PluginDescriptionFile permpdfFile = perms.getDescription();
@@ -31,9 +30,9 @@ public class PermissionsHandler {
 	    if (Permissions == null)
 	    {
 	      {
-	        plugin.getServer().getPluginManager().enablePlugin(perms);
+	    	manageAddon.plugin.getServer().getPluginManager().enablePlugin(perms);
 	        Permissions = ((Permissions)perms).getHandler();
-	        plugin.log.info(plugin.logPrefix + " Hooked into Permissions version " + permpdfFile.getVersion() + ".");
+	        manageAddon.plugin.log.info(manageAddon.plugin.logPrefix + " Hooked into Permissions version " + permpdfFile.getVersion() + ".");
 	        enablePermissions = true;
 	      }
 	    }
