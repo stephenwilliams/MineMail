@@ -1,8 +1,7 @@
 	package com.alta189.minemail.command;
 
 	import org.bukkit.ChatColor;
-import com.alta189.minemail.addons.IConomyFunctions;
-	import org.bukkit.command.Command;
+import org.bukkit.command.Command;
 	import org.bukkit.entity.Player;
 
 	import com.alta189.minemail.MineMail;
@@ -24,7 +23,7 @@ import com.alta189.minemail.addons.IConomyFunctions;
 			
 		}
 		
-		public void write(Player player, Command cmd, String commandLabel, String[] args) {
+		public void send(Player player, Command cmd, String commandLabel, String[] args) {
 			String receiver = args[1].toLowerCase();
 			String message = "";
 			Integer count = 3;
