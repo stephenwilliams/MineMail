@@ -1,6 +1,7 @@
 	package com.alta189.minemail.command;
 
 	import org.bukkit.ChatColor;
+import com.alta189.minemail.addons.IConomyFunctions;
 	import org.bukkit.command.Command;
 	import org.bukkit.entity.Player;
 
@@ -40,6 +41,7 @@
 				plugin.mmServer.sendMail(player.getName(), receiver, message);
 				player.sendMessage(ChatColor.GREEN
 						+ "Your message has been sent");
+	
 				plugin.notifyReceiver(receiver); 
 			
 		}

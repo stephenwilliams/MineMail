@@ -34,8 +34,7 @@ public class MineMailPlayerListener extends PlayerListener{
 			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
 				plugin.mmServer.getMail(player);
 			} else {
-				player.sendMessage(ChatColor.GREEN
-							+ "MineMail - No Messages");
+				this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - You have no new mail.", player);
 			}
 		}
 	}
