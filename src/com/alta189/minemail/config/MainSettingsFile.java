@@ -20,10 +20,10 @@ public class MainSettingsFile {
 	private HashMap<String,String> FileContents = new HashMap<String,String>();
 	
 	//Declare Settings\\
-	public Integer primaryColor = 1;
-	public Integer secondaryColor = 2;
-	public Integer headerColor = 3;
-	public Integer errorColor = 4;
+	public Integer primaryColor = 10;
+	public Integer secondaryColor = 12;
+	public Integer headerColor = 8;
+	public Integer errorColor = 7;
 	
 	
 	public MainSettingsFile(MineMail instance) {
@@ -101,5 +101,55 @@ public class MainSettingsFile {
 		}
 		
 		return result;
+	}
+	
+	public String getPropertyString(String property){
+		if (!file.exists()) {
+			load(false);
+		}
+		try {
+			if (FileContents.containsKey(property)) {
+				return FileContents.get(property);
+			}
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	public Boolean getPropertyBoolean(String property) {
+		if (!file.exists()) {
+			load(false);
+		}
+		try {
+			String result = FileContents.get(property);
+			if (result.equalsIgnoreCase("true") || result.equalsIgnoreCase("false")) {
+				return Boolean.valueOf(result.toLowerCase());
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+
+	public Integer getPropertyInteger(String property) {
+		if (!file.exists()) {
+			load(false);
+		}
+		try {
+			String result = FileContents.get(property);
+			//StruckDown.log.info(property + "=" + result);
+			return Integer.valueOf(result);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 10;
 	}
 }
