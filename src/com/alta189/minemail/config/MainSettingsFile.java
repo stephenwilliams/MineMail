@@ -24,6 +24,11 @@ public class MainSettingsFile {
 	public Integer secondaryColor = 12;
 	public Integer headerColor = 8;
 	public Integer errorColor = 7;
+	public Boolean iConomyEnabled = false;
+	public Integer costSend = 10;
+	public Integer costRecieve = 5;
+	public Integer costLongSend = 20;
+	public Boolean OPfree = true;
 	
 	
 	public MainSettingsFile(MineMail instance) {
