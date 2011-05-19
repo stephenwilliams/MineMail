@@ -16,7 +16,6 @@ public class MainSettingsFile {
 	private MineMail plugin;
 	public String fileName = "settings.properties";
 	public File file;
-	@SuppressWarnings("unused")
 	private HashMap<String,String> FileContents = new HashMap<String,String>();
 	
 	//Declare Settings\\
