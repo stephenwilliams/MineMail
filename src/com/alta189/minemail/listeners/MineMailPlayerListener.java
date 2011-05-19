@@ -3,6 +3,7 @@ package com.alta189.minemail.listeners;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -29,6 +30,7 @@ public class MineMailPlayerListener extends PlayerListener{
 	public void onReadMailWithPaper(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (player.getItemInHand().equals(Material.PAPER)) {
+			if (event.getAction() != Action.LEFT_CLICK_BLOCK)
 			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
 				plugin.mmServer.getMail(player);
 			} else {
