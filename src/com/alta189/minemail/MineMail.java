@@ -1,6 +1,7 @@
 package com.alta189.minemail;
 
 import java.io.File;
+import com.iConomy.*;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -8,6 +9,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.Event.Priority;
+import org.bukkit.event.Event.Type;
+import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +21,7 @@ import com.alta189.minemail.command.CommandHandler;
 import com.alta189.minemail.config.ConfigCore;
 import com.alta189.minemail.listeners.MineMailPlayerListener;
 import com.alta189.sqllitelib.sqlCore;
+import com.alta189.minemail.addons.IConomyHandler;
 
 public class MineMail extends JavaPlugin {
 	
@@ -39,15 +45,26 @@ public class MineMail extends JavaPlugin {
 	public Boolean ScheduledWipe = false;
 	public int DelayWipeTime = 60; //Time in seconds to delay the wipe
 	
+	//Declare the iConomy plugin\\
+	public iConomy iConomy = null;
+	
 	@Override
 	public void onDisable() {
-		// TODO Auto-generated method stub \\
+		// pdfFile \\
+		PluginDescriptionFile pdfFile = getDescription();
+		System.out.println(pdfFile.getName() + " version "
+				+ pdfFile.getVersion() + " is disabled!");
 		
 	}
 	
 	@Override
 	public void onEnable() {
-		// TODO Auto-generated method stub \\
+		// pdfFile \\
+		PluginDescriptionFile pdfFile = getDescription();
+		System.out.println(pdfFile.getName() + " version "
+				+ pdfFile.getVersion() + " is enabled!");
+		
+		//Create folders and database\\
 		createPluginFolder();
 		
 		this.dbManage = new sqlCore(this.log, this.logPrefix, "mail", pFolder.getPath());
@@ -63,6 +80,11 @@ public class MineMail extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
 	}
 	
+	public void onEnable(PluginDisableEvent event) {
+        getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, new IConomyHandler(this), Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new IConomyHandler(this), Priority.Monitor, this);
+    }
+
 	//Command Executer\\
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player player = (Player) sender;
