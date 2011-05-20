@@ -22,7 +22,6 @@ import com.alta189.minemail.config.ConfigCore;
 import com.alta189.minemail.listeners.MineMailPlayerListener;
 import com.alta189.minemail.listeners.ServerMonitor;
 import com.alta189.sqllitelib.sqlCore;
-import com.alta189.minemail.addons.IConomyHandler;
 
 public class MineMail extends JavaPlugin {
 	
