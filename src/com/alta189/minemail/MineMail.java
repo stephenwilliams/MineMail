@@ -77,13 +77,15 @@ public class MineMail extends JavaPlugin {
 		}
 		
 		PluginManager pm = this.getServer().getPluginManager();
+		//Register Events\\
 		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
+		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, new IConomyHandler(this), Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new IConomyHandler(this), Priority.Monitor, this);
 	}
 	
-	public void onEnable(PluginDisableEvent event) {
-        getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, new IConomyHandler(this), Priority.Monitor, this);
-        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new IConomyHandler(this), Priority.Monitor, this);
+	public void onDisable(PluginDisableEvent event) {
+        
     }
 
 	//Command Executer\\
