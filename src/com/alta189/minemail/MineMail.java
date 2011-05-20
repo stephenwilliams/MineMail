@@ -20,6 +20,7 @@ import com.alta189.minemail.addons.AddonManager;
 import com.alta189.minemail.command.CommandHandler;
 import com.alta189.minemail.config.ConfigCore;
 import com.alta189.minemail.listeners.MineMailPlayerListener;
+import com.alta189.minemail.listeners.ServerMonitor;
 import com.alta189.sqllitelib.sqlCore;
 import com.alta189.minemail.addons.IConomyHandler;
 
@@ -28,8 +29,8 @@ public class MineMail extends JavaPlugin {
 	//Declare all the basic objects\\
 	public final Logger log = Logger.getLogger("Minecraft");
 	public String version = "1.0";
-	public File pFolder = new File("plugins/MineMail");
-	public String logPrefix = "[MineMail] ";
+	public final File pFolder = new File("plugins/MineMail");
+	public final String logPrefix = "[MineMail] ";
 	
 	//Declare all of the Handlers\\
 	public sqlCore dbManage;
@@ -40,6 +41,7 @@ public class MineMail extends JavaPlugin {
 	
 	//Declare all of the Listeners\\
 	public MineMailPlayerListener pListener = new MineMailPlayerListener(this);
+	public ServerMonitor sMonitor = new ServerMonitor(this);
 	
 	//Declare any other variables\\
 	public Boolean ScheduledWipe = false;
@@ -61,8 +63,8 @@ public class MineMail extends JavaPlugin {
 	public void onEnable() {
 		// pdfFile \\
 		PluginDescriptionFile pdfFile = getDescription();
-		System.out.println(pdfFile.getName() + " version "
-				+ pdfFile.getVersion() + " is enabled!");
+		this.version =  pdfFile.getVersion();
+		this.log.info(this.logPrefix + "v " + version + " is initializing");
 		
 		//Create folders and database\\
 		createPluginFolder();
@@ -80,8 +82,8 @@ public class MineMail extends JavaPlugin {
 		//Register Events\\
 		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
-		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, new IConomyHandler(this), Priority.Monitor, this);
-        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new IConomyHandler(this), Priority.Monitor, this);
+		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, this.sMonitor, Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, this.sMonitor, Priority.Monitor, this);
 	}
 	
 	public void onDisable(PluginDisableEvent event) {
