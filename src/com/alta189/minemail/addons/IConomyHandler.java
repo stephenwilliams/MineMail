@@ -3,17 +3,12 @@ package com.alta189.minemail.addons;
 
 import org.bukkit.entity.Player;
 
-import com.alta189.minemail.MineMail;
 import com.iConomy.*;
 import com.iConomy.system.Account;
 import com.iConomy.system.Holdings;
 
 public class IConomyHandler {
-	private MineMail plugin;
 
-	public IConomyHandler(MineMail plugin) {
-	      this.plugin = plugin;
-	}
 
 	public Boolean hasAccount(Player player) {
 		if(iConomy.hasAccount(player.getName())) {
