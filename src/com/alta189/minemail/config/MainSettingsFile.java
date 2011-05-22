@@ -25,9 +25,9 @@ public class MainSettingsFile {
 	public Integer errorColor = 7;
 	public Integer helpColor = 14;
 	public Boolean iConomyEnabled = false;
-	public Integer costSend = 10;
-	public Integer costReceive = 5;
-	public Integer costLongSend = 20;
+	public Double costSend = 10.0;
+	public Double costReceive = 5.0;
+	public Double costLongSend = 20.0;
 	public Boolean OPfree = true;
 
 	
@@ -77,15 +77,6 @@ public class MainSettingsFile {
 		
 		this.FileContents = loadFileContents();
 		
-		/*public Integer primaryColor = 10;
-		public Integer secondaryColor = 12;
-		public Integer headerColor = 8;
-		public Integer errorColor = 7;
-		public Boolean iConomyEnabled = false;
-		public Integer costSend = 10;
-		public Integer costRecieve = 5;
-		public Integer costLongSend = 20;
-		public Boolean OPfree = true;*/
 		
 		//Get the Color Values\\
 		if (this.containsKey("headercolor")) {
@@ -134,13 +125,13 @@ public class MainSettingsFile {
 			this.OPfree = this.getPropertyBoolean("FreeForOps");
 		}
 		if (this.containsKey("sendprice")) {
-			this.costSend = this.getPropertyInteger("sendprice");
+			this.costSend = this.getPropertyDouble("sendprice");
 		}
 		if (this.containsKey("receiveprice")) {
-			this.costReceive = this.getPropertyInteger("receiveprice");
+			this.costReceive = this.getPropertyDouble("receiveprice");
 		}
 		if (this.containsKey("longmessageprice")) {
-			this.costLongSend = this.getPropertyInteger("longmessageprice");
+			this.costLongSend = this.getPropertyDouble("longmessageprice");
 		}
 		
 		//Check iConomy Settings\\
@@ -154,15 +145,15 @@ public class MainSettingsFile {
 		}
 		if (this.costSend == null || this.costSend < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, sendPrice is not valid. MineMail will use default");
-			this.costSend = 10;
+			this.costSend = 10.0;
 		}
 		if (this.costReceive == null || this.costReceive < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, receivePrice is not valid. MineMail will use default");
-			this.costReceive = 10;
+			this.costReceive = 5.0;
 		}
 		if (this.costLongSend == null || this.costLongSend < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, longMessagePrice is not valid. MineMail will use default");
-			this.costLongSend = 10;
+			this.costLongSend = 20.0;
 		}
 		
 	}
@@ -248,4 +239,21 @@ public class MainSettingsFile {
 		}
 		return 10;
 	}
+	
+	public Double getPropertyDouble(String property) {
+		if (!file.exists()) {
+			load(false);
+		}
+		try {
+			String result = FileContents.get(property);
+			if (!result.contains(".")) result = result + ".0";
+			
+			return Double.valueOf(result);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -10.0;
+	}
+	
 }
