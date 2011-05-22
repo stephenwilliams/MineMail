@@ -19,11 +19,9 @@ public class ReadPaper {
 	
 	public Boolean status(String playerName) {
 		if (this.isReader(playerName)) {
-			this.manageAddons.plugin.log.info("Exists " + this.readers.get(playerName).toString());
 			return this.readers.get(playerName);
 		} else {
 			this.updateReader(playerName, false);
-			this.manageAddons.plugin.log.info("Nope " + this.readers.get(playerName).toString());
 			return false;
 		}
 	}
