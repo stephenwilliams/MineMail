@@ -33,6 +33,7 @@ public class MainSettingsFile {
 	
 	public MainSettingsFile(MineMail instance) {
 		this.plugin = instance;
+		this.file = new File(this.plugin.pFolder.getPath() + File.separator + fileName);
 	}
 
 	private void create() {
@@ -70,6 +71,11 @@ public class MainSettingsFile {
 	}
 	
 	public void load(Boolean force) { //If force is true than it will delete the file and recreate it
+		
+		if (file == null) {
+			this.file = new File(this.plugin.pFolder.getPath() + File.separator + fileName);
+		}
+		
 		if (!file.exists() || force) {
 			if (force) this.delete();
 			create();
