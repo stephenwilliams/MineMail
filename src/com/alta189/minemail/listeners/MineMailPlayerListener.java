@@ -30,7 +30,7 @@ public class MineMailPlayerListener extends PlayerListener{
 		Player player = event.getPlayer();
 		
 		if (player.getItemInHand().getType().equals(Material.PAPER) && this.plugin.addons.managePaper.status(player.getName().toLowerCase())) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
 				if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
 					plugin.mmServer.getMail(player);
 				} else {

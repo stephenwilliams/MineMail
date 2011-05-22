@@ -3,7 +3,7 @@ package com.alta189.minemail.addons;
 import java.util.HashMap;
 
 public class ReadPaper {
-	private AddonManager manageAddons;
+	public AddonManager manageAddons;
 	private HashMap<String,Boolean> readers = new HashMap<String,Boolean>();
 	
 	public ReadPaper(AddonManager instance) {
