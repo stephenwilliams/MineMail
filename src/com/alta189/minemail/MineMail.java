@@ -131,6 +131,16 @@ public class MineMail extends JavaPlugin {
 		return false;
 	}
 	
+	public Boolean isFree(Player player) {
+		if (this.config.settingsFile.OPfree && player.isOp()) {
+			return true;
+		}
+		if (this.addons.PermManager.hasPermissions(player, "free")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void createPluginFolder() { //This will create the plugin folder so that we can store stuff in it!
 		if (!this.pFolder.exists()) {
 			pFolder.mkdir();

@@ -15,6 +15,27 @@
 		
 		public void read(Player player, Command cmd, String commandLabel, String[] args) {
 			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
+				Boolean payed = false;
+				//iConomy Support\\
+				
+				if (!this.plugin.isFree(player)) {
+					if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {
+						if (this.plugin.addons.iConomyManager.hasAccount(player) && this.plugin.addons.iConomyManager.hasValidAccount(player)) {
+							if (this.plugin.addons.iConomyManager.hasEnough(this.plugin.config.settingsFile.costReceive, this.plugin.addons.iConomyManager.getHoldings(player.getName()))) {
+								this.plugin.addons.iConomyManager.subtract(this.plugin.config.settingsFile.costReceive, this.plugin.addons.iConomyManager.getHoldings(player.getName()));
+								payed = true;
+							} else {
+								player.sendMessage("<error>You do not have enough in your iConomy Account");
+							}
+						} else {
+							player.sendMessage("<error>You do not have a valid iConomy Account");
+						}
+					}
+					
+				}
+				if (payed) {
+					player.sendMessage("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costReceive) + " was subtracted from your account");
+				}
 				plugin.mmServer.getMail(player);
 			} else {
 				player.sendMessage("<header>MineMail - <c1>No Messages");
@@ -27,6 +48,7 @@
 			String message = "";
 			Integer count = 3;
 			Boolean formatErrors = false;
+			Boolean payed = false;
 
 			while (count <= args.length) {
 				if (count == 3) {
@@ -36,6 +58,24 @@
 				}
 				count = count + 1;
 			}
+			
+			//iConomy Support\\
+			
+			if (!this.plugin.isFree(player)) {
+				if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {
+					if (this.plugin.addons.iConomyManager.hasAccount(player) && this.plugin.addons.iConomyManager.hasValidAccount(player)) {
+						if (this.plugin.addons.iConomyManager.hasEnough(this.plugin.config.settingsFile.costSend, this.plugin.addons.iConomyManager.getHoldings(player.getName()))) {
+							this.plugin.addons.iConomyManager.subtract(this.plugin.config.settingsFile.costSend, this.plugin.addons.iConomyManager.getHoldings(player.getName()));
+						} else {
+							player.sendMessage("<error>You do not have enough in your iConomy Account");
+						}
+					} else {
+						player.sendMessage("<error>You do not have a valid iConomy Account");
+					}
+				}
+				
+			}
+			
 			if (this.plugin.addons.formatSQL.check(message)) {
 				message = this.plugin.addons.formatSQL.fix(message);
 				formatErrors = true;
@@ -45,8 +85,14 @@
 				if (formatErrors) {
 					player.sendMessage("<c1>Your message has been sent, <error>but there were format errors.");
 					player.sendMessage("<error>Use /mail format to see what characters are not allowed");
+					if (payed) {
+						player.sendMessage("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costSend) + " was subtracted from your account");
+					}
 				} else {
 					player.sendMessage("<c1>Your message has been sent");
+					if (payed) {
+						player.sendMessage("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costSend) + " was subtracted from your account");
+					}
 				}
 				plugin.notifyReceiver(receiver); 
 			

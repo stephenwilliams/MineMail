@@ -3,12 +3,17 @@ package com.alta189.minemail.addons;
 
 import org.bukkit.entity.Player;
 
-import com.iConomy.*;
+import com.alta189.minemail.MineMail;
+import com.iConomy.iConomy;
 import com.iConomy.system.Account;
 import com.iConomy.system.Holdings;
 
 public class IConomyHandler {
-
+	public MineMail plugin;
+	
+	public IConomyHandler(MineMail instance) {
+		this.plugin = instance;
+	}
 
 	public Boolean hasAccount(Player player) {
 		if(iConomy.hasAccount(player.getName())) {
@@ -50,6 +55,10 @@ public class IConomyHandler {
 		}
 		
 		return balance;
+	}
+	
+	public String formatAmount(Double amount) {
+		return iConomy.format(amount);
 	}
 	
 	public void subtract(Double amount, Holdings balance) {
