@@ -3,7 +3,6 @@ package com.alta189.minemail.addons;
 import java.util.HashMap;
 
 public class ReadPaper {
-	@SuppressWarnings("unused")
 	private AddonManager manageAddons;
 	private HashMap<String,Boolean> readers = new HashMap<String,Boolean>();
 	
@@ -20,9 +19,11 @@ public class ReadPaper {
 	
 	public Boolean status(String playerName) {
 		if (this.isReader(playerName)) {
+			this.manageAddons.plugin.log.info("Exists " + this.readers.get(playerName).toString());
 			return this.readers.get(playerName);
 		} else {
 			this.updateReader(playerName, false);
+			this.manageAddons.plugin.log.info("Nope " + this.readers.get(playerName).toString());
 			return false;
 		}
 	}

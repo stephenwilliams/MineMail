@@ -37,9 +37,6 @@ public class MineMail extends JavaPlugin {
 	public MailServer mmServer = new MailServer(this);
 	public ConfigCore config = new ConfigCore(this);
 	
-	//Declare all of the Listeners\\
-	public MineMailPlayerListener pListener = new MineMailPlayerListener(this);
-	public ServerMonitor sMonitor = new ServerMonitor(this);
 	
 	//Declare any other variables\\
 	public Boolean ScheduledWipe = false;
@@ -80,11 +77,10 @@ public class MineMail extends JavaPlugin {
 		
 		PluginManager pm = this.getServer().getPluginManager();
 		//Register Events\\
-		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
-		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, this.sMonitor, Priority.Monitor, this);
-        getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, this.sMonitor, Priority.Monitor, this);
+		pm.registerEvent(Event.Type.PLAYER_JOIN, new MineMailPlayerListener(this), Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.PLAYER_INTERACT, new MineMailPlayerListener(this), Event.Priority.Normal, this);
+		pm.registerEvent(Type.PLUGIN_ENABLE, new ServerMonitor(this), Priority.Monitor, this);
+		pm.registerEvent(Type.PLUGIN_DISABLE, new ServerMonitor(this), Priority.Monitor, this);
         
         this.log.info(this.logPrefix + "v " + version + " is initialized");
 	}

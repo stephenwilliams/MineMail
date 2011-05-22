@@ -28,7 +28,7 @@
 								this.plugin.addons.msgFormat.formatAndSend("<error>You do not have enough in your iConomy Account", player);
 							}
 						} else {
-							this.plugin.addons.msgFormat.formatAndSend("<error>You do not have a valid iConomy Account", player);
+							this.plugin.addons.msgFormat.formatAndSend("<error>You do not have enough in your iConomy Account", player);
 						}
 					}
 					
