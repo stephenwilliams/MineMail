@@ -69,57 +69,57 @@ public class sqlFormatter {
 	public String fix(String input) {
 		String result = input;
 		if (result.contains("@")) {
-			result.replace("@", "");
+			result = result.replace("@", "");
 		} if (result.contains("#")) {
-			result.replace("#", "");
+			result = result.replace("#", "");
 		} if (result.contains("%")) {
-			result.replace("%", "");
+			result = result.replace("%", "");
 		} if (result.contains("^")) {
-			result.replace("^", "");
+			result = result.replace("^", "");
 		} if (result.contains("&")) {
-			result.replace("&", "");
+			result = result.replace("&", "");
 		} if (result.contains("*")) {
-			result.replace("*", "");
+			result = result.replace("*", "");
 		} if (result.contains("(")) {
-			result.replace("(", "");
+			result = result.replace("(", "");
 		} if (result.contains(")")) {
-			result.replace(")", "");
+			result = result.replace(")", "");
 		} if (result.contains("-")) {
-			result.replace("-", "");
+			result = result.replace("-", "");
 		} if (result.contains("+")) {
-			result.replace("+", "");
+			result = result.replace("+", "");
 		} if (result.contains("=")) {
-			result.replace("=", "");
+			result = result.replace("=", "");
 		} if (result.contains("[")) {
-			result.replace("[", "");
+			result = result.replace("[", "");
 		} if (result.contains("]")) {
-			result.replace("]", "");
+			result = result.replace("]", "");
 		} if (result.contains("\"")) {
-			result.replace("\"", "");
+			result = result.replace("\"", "");
 		} if (result.contains("\\")) {
-			result.replace("\\", "");
+			result = result.replace("\\", "");
 		} if (result.contains("'")) {
-			result.replace("'", "");
+			result = result.replace("'", "");
 		} if (result.contains("|")) {
-			result.replace("|", "");
+			result = result.replace("|", "");
 		} if (result.contains("<")) {
-			result.replace("<", "");
+			result = result.replace("<", "");
 		} if (result.contains(">")) {
-			result.replace(">", "");
+			result = result.replace(">", "");
 		} if (result.contains("/")) {
-			result.replace("/", "");
+			result = result.replace("/", "");
 		} if (result.contains("`")) {
-			result.replace("`", "");
+			result = result.replace("`", "");
 		} if (result.contains("~")) {
-			result.replace("~", "");
+			result = result.replace("~", "");
 		} if (result.contains(":")) {
-			result.replace(":", "");
+			result = result.replace(":", "");
 		} if (result.contains(";")) {
-			result.replace(";", "");
+			result = result.replace(";", "");
 		} if (result.contains("{")) {
-			result.replace("{", "");
+			result = result.replace("{", "");
 		} if (result.contains("}")) {
-			result.replace("}", "");
+			result = result.replace("}", "");
 		}	
 		return result;
 	}

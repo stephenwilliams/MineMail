@@ -82,6 +82,7 @@ public class MineMail extends JavaPlugin {
 		//Register Events\\
 		pm.registerEvent(Event.Type.PLAYER_JOIN, this.pListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
 		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, this.sMonitor, Priority.Monitor, this);
         getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, this.sMonitor, Priority.Monitor, this);
         
@@ -103,7 +104,7 @@ public class MineMail extends JavaPlugin {
 				 		if (args.length >= 3) {
 				 			this.command.write(player, cmd, commandLabel, args);
 				 		} else {
-				 			player.sendMessage("<help>/mm write <player name> <message>"); 
+				 			this.addons.msgFormat.formatAndSend("<help>/mm write <player name> <message>", player); 
 				 		}
 				 	} else if (args[0].equalsIgnoreCase("help") && player != null) {
 				 		this.command.help(player, cmd, commandLabel, args);
@@ -113,7 +114,13 @@ public class MineMail extends JavaPlugin {
 				 		this.command.wipe(player, cmd, commandLabel, args);
 				 	} else if (args[0].equalsIgnoreCase("reload") && player != null) {
 				 		this.command.reload(player, cmd, commandLabel, args);
+				 	} else if (args[0].equalsIgnoreCase("paper") && player != null) {
+				 		this.command.paper(player, cmd, commandLabel, args);
+				 	} else if (args[0].equalsIgnoreCase("format") && player != null) {
+				 		this.command.formatHelp(player, cmd, commandLabel, args);
 				 	}
+			 } else {
+				 this.command.help(player, cmd, commandLabel, args);
 			 }
 		}
 		return false;
@@ -167,7 +174,7 @@ public class MineMail extends JavaPlugin {
 	public void notifyReceiver(String playername) { //This is an easy way to notify the player when he gets a message
 		Player receiver = this.getPlayer(playername);
 		if (receiver != null) {
-			addons.msgFormat.formatAndSend("MineMail - You got a message", receiver);
+			addons.msgFormat.formatAndSend("<header>MineMail <c1>- You got a message", receiver);
 		}
 	}
 }

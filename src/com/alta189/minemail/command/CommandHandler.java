@@ -76,7 +76,7 @@
 				
 			}
 			
-			if (this.plugin.addons.formatSQL.check(message)) {
+			if (!this.plugin.addons.formatSQL.check(message)) {
 				message = this.plugin.addons.formatSQL.fix(message);
 				formatErrors = true;
 			}

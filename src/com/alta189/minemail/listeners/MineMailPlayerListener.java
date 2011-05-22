@@ -21,7 +21,7 @@ public class MineMailPlayerListener extends PlayerListener{
 		Player player = event.getPlayer();
 		int unRead = plugin.mmServer.getUnreadCount(player.getName().toLowerCase());
 		if (unRead >= 1) {
-			player.sendMessage(ChatColor.GREEN + "MineMail - You have " + ChatColor.RED + unRead + ChatColor.GREEN + " new messages.");
+			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - <c1>You have <c2>" + unRead + " <c1>new messages.", player);
 		} else {
 			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - <c1>You have no new mail.", player);
 		}
