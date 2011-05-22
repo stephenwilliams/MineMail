@@ -64,6 +64,9 @@ import org.bukkit.command.Command;
 			player.sendMessage("<header>---   MineMail Help   ---");
 			player.sendMessage("<c1>/mail write [player] [message] <help>- Send a message");
 			player.sendMessage("<c1>/mail read <help>- Read your messages");
+			if (plugin.isAdmin(player, "paper")) {
+				player.sendMessage("<c1>/mail paper <help>- Toggles reading mail by clicking with paper in hand.");
+			}
 			this.admin(player, cmd, commandLabel, args);
 		}
 		
@@ -93,13 +96,26 @@ import org.bukkit.command.Command;
 			if (plugin.isAdmin(player, "wipe|reload")) {
 				player.sendMessage("<c1>/mail reload <help>- Reload Mail System and settings!");
 				player.sendMessage("<c1>/mail wipe <help>- Wipes the database");
-				
-			} else {
-				player.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
+			} else if (args[0].equalsIgnoreCase("help")) {
+				player.sendMessage("<error>You do not have permission to use this command!");
 			}
 		}
 		
 		public void formatHelp(Player player, Command cmd, String commandLabel, String[] args) {
 			
+		}
+		
+		public void paper(Player player, Command cmd, String commandLabel, String[] args) {
+			if (plugin.isAdmin(player, "paper")) {
+				Boolean read = this.plugin.addons.managePaper.toggleReader(player.getName().toLowerCase());
+				
+				if (read) {
+					player.sendMessage("<header>MineMail - <c1>Paper read is enabled");
+				} else {
+					player.sendMessage("<header>MineMail - <c1>Paper read is disabled");
+				}
+			} else {
+				player.sendMessage("<error>You do not have permission to use this command!");
+			}
 		}
 	}

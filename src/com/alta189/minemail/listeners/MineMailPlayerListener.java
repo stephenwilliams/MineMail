@@ -23,18 +23,19 @@ public class MineMailPlayerListener extends PlayerListener{
 		if (unRead >= 1) {
 			player.sendMessage(ChatColor.GREEN + "MineMail - You have " + ChatColor.RED + unRead + ChatColor.GREEN + " new messages.");
 		} else {
-			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - You have no new mail.", player);
+			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - <c1>You have no new mail.", player);
 		}
 		
 	}
 	public void onReadMailWithPaper(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if (player.getItemInHand().equals(Material.PAPER)) {
-			if (event.getAction() != Action.LEFT_CLICK_BLOCK)
-			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
-				plugin.mmServer.getMail(player);
-			} else {
-				this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - You have no new mail.", player);
+		if (player.getItemInHand().equals(Material.PAPER) && this.plugin.addons.managePaper.status(event.getPlayer().getName().toLowerCase())) {
+			if (event.getAction() != Action.LEFT_CLICK_BLOCK) {
+				if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
+					plugin.mmServer.getMail(player);
+				} else {
+					this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - <c1>You have no new mail.", player);
+				}
 			}
 		}
 	}
