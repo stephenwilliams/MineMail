@@ -57,6 +57,12 @@ public class PermissionsHandler {
 				        	return true;
 				        }
 				  } 
+			  } else if (type.equals("wipe")) {
+			      if (Permissions != null) {
+				        if (Permissions.has(player, "minemail.paper")) {
+				        	return true;
+				        }
+				  } 
 			  }
 			  return false;
 		  } else {

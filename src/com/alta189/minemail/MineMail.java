@@ -4,7 +4,6 @@ import java.io.File;
 import com.iConomy.*;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +27,7 @@ public class MineMail extends JavaPlugin {
 	//Declare all the basic objects\\
 	public final Logger log = Logger.getLogger("Minecraft");
 	public String version = "1.0";
-	public final File pFolder = new File("plugins/MineMail");
+	public final File pFolder = new File("plugins" + File.separator + "MineMail");
 	public final String logPrefix = "[MineMail] ";
 	
 	//Declare all of the Handlers\\
@@ -65,6 +64,8 @@ public class MineMail extends JavaPlugin {
 		
 		//Create folders and database\\
 		createPluginFolder();
+		
+		this.config.initialize();
 		
 		this.dbManage = new sqlCore(this.log, this.logPrefix, "mail", pFolder.getPath());
 		
