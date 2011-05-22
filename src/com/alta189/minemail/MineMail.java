@@ -67,6 +67,8 @@ public class MineMail extends JavaPlugin {
 		
 		this.config.initialize();
 		
+		this.addons.initialize();
+		
 		this.dbManage = new sqlCore(this.log, this.logPrefix, "mail", pFolder.getPath());
 		
 		this.dbManage.initialize();
@@ -82,6 +84,8 @@ public class MineMail extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pListener, Event.Priority.Normal, this);
 		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, this.sMonitor, Priority.Monitor, this);
         getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, this.sMonitor, Priority.Monitor, this);
+        
+        this.log.info(this.logPrefix + "v " + version + " is initialized");
 	}
 	
 	public void onDisable(PluginDisableEvent event) {
