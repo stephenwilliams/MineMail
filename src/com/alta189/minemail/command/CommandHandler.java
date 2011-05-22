@@ -1,7 +1,7 @@
 	package com.alta189.minemail.command;
 
-	import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
+	
+	import org.bukkit.command.Command;
 	import org.bukkit.entity.Player;
 
 	import com.alta189.minemail.MineMail;
@@ -26,6 +26,7 @@ import org.bukkit.command.Command;
 			String receiver = args[1].toLowerCase();
 			String message = "";
 			Integer count = 3;
+			Boolean formatErrors = false;
 
 			while (count <= args.length) {
 				if (count == 3) {
@@ -35,10 +36,18 @@ import org.bukkit.command.Command;
 				}
 				count = count + 1;
 			}
-
+			if (this.plugin.addons.formatSQL.check(message)) {
+				message = this.plugin.addons.formatSQL.fix(message);
+				formatErrors = true;
+			}
 				plugin.mmServer.sendMail(player.getName(), receiver, message);
-				player.sendMessage("<c1>Your message has been sent");
-	
+				
+				if (formatErrors) {
+					player.sendMessage("<c1>Your message has been sent, <error>but there were format errors.");
+					player.sendMessage("<error>Use /mail format to see what characters are not allowed");
+				} else {
+					player.sendMessage("<c1>Your message has been sent");
+				}
 				plugin.notifyReceiver(receiver); 
 			
 		}
@@ -64,6 +73,7 @@ import org.bukkit.command.Command;
 			player.sendMessage("<header>---   MineMail Help   ---");
 			player.sendMessage("<c1>/mail write [player] [message] <help>- Send a message");
 			player.sendMessage("<c1>/mail read <help>- Read your messages");
+			player.sendMessage("<c1>/mail format <help>- Shows characters that will be removed from your msg");
 			if (plugin.isAdmin(player, "paper")) {
 				player.sendMessage("<c1>/mail paper <help>- Toggles reading mail by clicking with paper in hand.");
 			}
@@ -108,7 +118,6 @@ import org.bukkit.command.Command;
 		public void paper(Player player, Command cmd, String commandLabel, String[] args) {
 			if (plugin.isAdmin(player, "paper")) {
 				Boolean read = this.plugin.addons.managePaper.toggleReader(player.getName().toLowerCase());
-				
 				if (read) {
 					player.sendMessage("<header>MineMail - <c1>Paper read is enabled");
 				} else {

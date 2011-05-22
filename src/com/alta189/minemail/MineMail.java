@@ -51,10 +51,8 @@ public class MineMail extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		// pdfFile \\
-		PluginDescriptionFile pdfFile = getDescription();
-		System.out.println(pdfFile.getName() + " version "
-				+ pdfFile.getVersion() + " is disabled!");
+		
+		this.log.info(this.logPrefix + "v " + version + "is disabled");
 		
 	}
 	

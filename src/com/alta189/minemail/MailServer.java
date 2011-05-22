@@ -34,6 +34,7 @@ public class MailServer {
 	}
 	
 	public boolean sendMail(String sender, String receiver, String message) {
+		
 	    String query = "INSERT INTO mails (sender, receiver, message) values ('" + sender + "', '" + receiver + "', '" + message + "');";
 	      plugin.dbManage.insertQuery(query);
 	      return true;
