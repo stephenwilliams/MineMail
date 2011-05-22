@@ -98,9 +98,9 @@ public class MineMail extends JavaPlugin {
 				 		this.command.read(player, cmd, commandLabel, args);
 				 	} else if (args[0].equalsIgnoreCase("write") && player != null) {
 				 		if (args.length >= 3) {
-				 			this.command.send(player, cmd, commandLabel, args);
+				 			this.command.write(player, cmd, commandLabel, args);
 				 		} else {
-				 			player.sendMessage(ChatColor.RED + "/mm write <player name> <message>"); 
+				 			player.sendMessage("<help>/mm write <player name> <message>"); 
 				 		}
 				 	} else if (args[0].equalsIgnoreCase("help") && player != null) {
 				 		this.command.help(player, cmd, commandLabel, args);
