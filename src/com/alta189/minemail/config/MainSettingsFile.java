@@ -23,6 +23,7 @@ public class MainSettingsFile {
 	public Integer secondaryColor = 12;
 	public Integer headerColor = 8;
 	public Integer errorColor = 7;
+	public Integer helpColor = 14;
 	public Boolean iConomyEnabled = false;
 	public Integer costSend = 10;
 	public Integer costReceive = 5;
@@ -91,13 +92,16 @@ public class MainSettingsFile {
 			this.headerColor = this.getPropertyInteger("headercolor");
 		}
 		if (this.containsKey("secondarycolor")) {
-			this.secondaryColor = this.getPropertyInteger("headercolor");
+			this.secondaryColor = this.getPropertyInteger("secondarycolor");
 		}
 		if (this.containsKey("primarycolor")) {
 			this.primaryColor = this.getPropertyInteger("primarycolor");
 		}
 		if (this.containsKey("errorcolor")) {
 			this.errorColor = this.getPropertyInteger("errorcolor");
+		}
+		if (this.containsKey("helpcolor")) {
+			this.helpColor = this.getPropertyInteger("helpcolor");
 		}
 		
 		//Check Color values\\
@@ -107,15 +111,19 @@ public class MainSettingsFile {
 		}
 		if (this.primaryColor > 14 || this.primaryColor < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, PrimaryColor is not valid. MineMail will use default");
-			this.headerColor = 8;
+			this.primaryColor = 8;
 		}
 		if (this.secondaryColor > 14 || this.secondaryColor < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, SecondaryColor is not valid. MineMail will use default");
-			this.headerColor = 8;
+			this.secondaryColor = 8;
 		}
 		if (this.errorColor > 14 || this.errorColor < 0) {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, ErrorColor is not valid. MineMail will use default");
-			this.headerColor = 8;
+			this.errorColor = 8;
+		}
+		if (this.helpColor > 14 || this.helpColor < 0) {
+			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, HelpColor is not valid. MineMail will use default");
+			this.helpColor = 14;
 		}
 		
 		//Load iConomy Settings\\

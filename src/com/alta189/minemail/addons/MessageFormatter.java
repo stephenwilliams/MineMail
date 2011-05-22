@@ -80,8 +80,11 @@ public class MessageFormatter {
 	    if (message.contains("<c1>")) {
 	    	message = message.replaceAll("<c1>", convertColorID(this.manageAddon.plugin.config.settingsFile.primaryColor).toString());
 	    }
-	    if (message.contains("<c2")) {
+	    if (message.contains("<c2>")) {
 	    	message = message.replaceAll("<c2>", convertColorID(this.manageAddon.plugin.config.settingsFile.secondaryColor).toString());
+	    }
+	    if (message.contains("<help>")) {
+	    	message = message.replaceAll("<help>", convertColorID(this.manageAddon.plugin.config.settingsFile.helpColor).toString());
 	    }
 	    
 	    for (Player check : this.manageAddon.plugin.getServer().getOnlinePlayers()) {
