@@ -1,6 +1,6 @@
 name: MineMail
 main: com.alta189.minemail.MineMail
-version: 1.12
+version: 1.3
 authors: [PhysX, alta189]
 commands:
   mail:
