@@ -3,6 +3,7 @@ package com.alta189.minemail.config;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,39 +37,40 @@ public class MainSettingsFile {
 		this.file = new File(this.plugin.pFolder.getPath() + File.separator + fileName);
 	}
 
-	private void create() {
-		//First we are going to load the file from within the jar in the package com.alta189.minemail.config.defaults
-		String contents = null;
-		try {
-			InputStream is = MainSettingsFile.class.getResourceAsStream("defaults/Settings.properties");
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		    
-			String line = null;
-			
-			
-			while (null != (line = br.readLine())) {
-		         contents = contents + line;
-		    }
-			if (is != null) is.close();
-			if (br != null) br.close();
-		} catch (IOException ex) {
-			plugin.log.severe(plugin.logPrefix + "Error loading settings.properties file. Contact alta189!");
-			return;
-		}
-		
-		try {
-			
-		    
-			FileWriter fstream = new FileWriter(file);
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(contents);
-			
-		} catch (IOException ex) {
-			plugin.log.severe(plugin.logPrefix + "Error creating settings.properties file!");
-			return;
-		}
-		
-	}
+	
+	private void create(String name) {
+	      InputStream input = getClass().getResourceAsStream("defaults/" + name);
+	      if (input != null) {
+	        FileOutputStream output = null;
+	        try
+	        {
+	          output = new FileOutputStream(file);
+	          byte[] buf = new byte[8192];
+	          int length = 0;
+
+	          while ((length = input.read(buf)) > 0) {
+	            output.write(buf, 0, length);
+	          }
+
+	        } catch (Exception e) {
+	          e.printStackTrace();
+	        } finally {
+	          try {
+	            if (input != null)
+	              input.close();
+	          } catch (Exception e) {
+	          }
+	          try {
+	            if (output != null)
+	              output.close();
+	          }
+	          catch (Exception e)
+	          {
+	          }
+	        }
+	      }
+	    }
+	
 	
 	public void load(Boolean force) { //If force is true than it will delete the file and recreate it
 		
@@ -78,7 +80,8 @@ public class MainSettingsFile {
 		
 		if (!file.exists() || force) {
 			if (force) this.delete();
-			create();
+			//create();
+			create("Settings.properties");
 		}
 		
 		this.FileContents = loadFileContents();

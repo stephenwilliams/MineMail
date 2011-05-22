@@ -158,7 +158,8 @@
 		}
 		
 		public void formatHelp(Player player, Command cmd, String commandLabel, String[] args) {
-			
+			//@#%^&*()-+=[]{}|\/":';<>~`
+			player.sendMessage("<c1>Characters that will be removed from message <help>- @#%^&*()-+=[]{}|\\/\":';<>~`");
 		}
 		
 		public void paper(Player player, Command cmd, String commandLabel, String[] args) {
