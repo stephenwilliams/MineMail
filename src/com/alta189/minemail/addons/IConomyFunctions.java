@@ -19,20 +19,19 @@ public class IConomyFunctions {
 					balance.subtract(amount);
 					return true;
 				}
-
-			}else {
-				if (!player.isOp() && instance.plugin.isFree(player)) {
-					if (instance.hasAccount(player) == true) {
-						if (instance.hasEnough(amount, balance) == true) {
-							balance.subtract(amount);
-							return true;
-						}
+			}
+		}else {
+			if (!player.isOp() && instance.plugin.isFree(player)) {
+				if (instance.hasAccount(player) == true) {
+					if (instance.hasEnough(amount, balance) == true) {
+						balance.subtract(amount);
+						return true;
 					}
 				}
+				
 			}
-			//Default is to return false
-			return false;
 		}
+		//Default is to return false
 		return false;
 	}
 }
