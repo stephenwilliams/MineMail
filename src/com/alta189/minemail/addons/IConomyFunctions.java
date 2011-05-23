@@ -31,7 +31,8 @@ public class IConomyFunctions {
 				}
 			}
 			//Default is to return false
-			return false
+			return false;
 		}
+		return false;
 	}
 }
