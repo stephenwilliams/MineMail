@@ -1,5 +1,6 @@
 package com.alta189.minemail.addons;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import com.iConomy.system.Holdings;
 import com.alta189.minemail.addons.IConomyHandler;
@@ -13,26 +14,25 @@ public class IConomyFunctions {
 
 	public Boolean takeBalance(Player player, Double amount, Holdings balance) {
 
-		if (player.isOp() && instance.plugin.isFree(player)) {
+		if (instance.plugin.isFree(player)) {
 			if (instance.hasAccount(player) == true) {
-				if (instance.hasEnough(amount, balance) == true) {
-					balance.subtract(amount);
+				player.sendMessage("<header>MineMail <c1>- You weren't charged for this!");
 					return true;
 				}
 
 			}else {
-				if (!player.isOp() && instance.plugin.isFree(player)) {
+				if (!instance.plugin.isFree(player)) {
 					if (instance.hasAccount(player) == true) {
 						if (instance.hasEnough(amount, balance) == true) {
 							balance.subtract(amount);
+							player.sendMessage("<header>MineMail <c1>- You were charged for this!");
+							player.sendMessage(ChatColor.WHITE + "[" + ChatColor.GREEN + "iConomy" + ChatColor.WHITE + "]" + ChatColor.GREEN + "Balance: " + balance);
 							return true;
 						}
 					}
 				}
 			}
-			//Default is to return false
-			return false;
-		}
 		return false;
 	}
 }
+	
