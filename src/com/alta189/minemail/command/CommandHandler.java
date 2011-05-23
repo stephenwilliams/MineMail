@@ -73,7 +73,6 @@
 						this.plugin.addons.msgFormat.formatAndSend("<error>You do not have a valid iConomy Account", player);
 					}
 				}
-				
 			}
 			
 			if (!this.plugin.addons.formatSQL.check(message)) {
@@ -152,7 +151,7 @@
 			if (plugin.isAdmin(player, "wipe|reload")) {
 				this.plugin.addons.msgFormat.formatAndSend("<c1>/mail reload <help>- Reload Mail System and settings!", player);
 				this.plugin.addons.msgFormat.formatAndSend("<c1>/mail wipe <help>- Wipes the database", player);
-			} else if (args[0].equalsIgnoreCase("help")) {
+			} else if (!args[0].equalsIgnoreCase("help")) {
 				this.plugin.addons.msgFormat.formatAndSend("<error>You do not have permission to use this command!", player);
 			}
 		}

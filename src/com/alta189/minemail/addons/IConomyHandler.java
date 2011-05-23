@@ -54,7 +54,6 @@ public class IConomyHandler {
 			Double amount = this.getHoldings(player.getName()).balance();
 			balance = iConomy.format(amount);
 		}
-		
 		return balance;
 	}
 	

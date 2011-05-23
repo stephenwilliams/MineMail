@@ -161,7 +161,7 @@ public class MainSettingsFile {
 			this.plugin.log.warning(this.plugin.logPrefix + " Error in settings, longMessagePrice is not valid. MineMail will use default");
 			this.costLongSend = 20.0;
 		}
-		
+		this.plugin.log.info("iConomy = " + this.iConomyEnabled.toString());
 	}
 	
 	public Boolean containsKey(String key) {

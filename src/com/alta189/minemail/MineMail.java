@@ -102,6 +102,12 @@ public class MineMail extends JavaPlugin {
 				 		} else {
 				 			this.addons.msgFormat.formatAndSend("<help>/mm write <player name> <message>", player); 
 				 		}
+				 	} else if (args[0].equalsIgnoreCase("send") && player != null) {
+				 		if (args.length >= 3) {
+				 			this.command.write(player, cmd, commandLabel, args);
+				 		} else {
+				 			this.addons.msgFormat.formatAndSend("<help>/mm send <player name> <message>", player); 
+				 		}
 				 	} else if (args[0].equalsIgnoreCase("help") && player != null) {
 				 		this.command.help(player, cmd, commandLabel, args);
 				 	} else if (args[0].equalsIgnoreCase("admin") && player != null) {

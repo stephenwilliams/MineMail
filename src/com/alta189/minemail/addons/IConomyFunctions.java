@@ -11,23 +11,27 @@ public class IConomyFunctions {
 		instance = plugin;
 	}
 
-	public void takeBalance(Player Player, Double amount, Holdings balance) {
+	public Boolean takeBalance(Player player, Double amount, Holdings balance) {
 
-		if (Player.isOp() && instance.plugin.isFree(Player)) {
-			if (instance.hasAccount(Player) == true) {
+		if (player.isOp() && instance.plugin.isFree(player)) {
+			if (instance.hasAccount(player) == true) {
 				if (instance.hasEnough(amount, balance) == true) {
 					balance.subtract(amount);
+					return true;
 				}
 
 			}else {
-				if (!Player.isOp() && instance.plugin.isFree(Player)) {
-					if (instance.hasAccount(Player) == true) {
+				if (!player.isOp() && instance.plugin.isFree(player)) {
+					if (instance.hasAccount(player) == true) {
 						if (instance.hasEnough(amount, balance) == true) {
 							balance.subtract(amount);
+							return true;
 						}
+					}
+				}
 			}
-		}
-			}
+			//Default is to return false
+			return false
 		}
 	}
 }
