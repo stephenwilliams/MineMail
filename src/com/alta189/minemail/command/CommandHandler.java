@@ -15,10 +15,12 @@
 		
 		public void read(Player player, Command cmd, String commandLabel, String[] args) {
 			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
-				Boolean payed = false;
-				//iConomy Support\\
 				
-				if (!this.plugin.isFree(player)) {
+				//iConomy Support\\
+				if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costReceive)) {
+					return;
+				}
+				/*if (!this.plugin.isFree(player)) {
 					if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {
 						if (this.plugin.addons.iConomyManager.hasAccount(player) && this.plugin.addons.iConomyManager.hasValidAccount(player)) {
 							if (this.plugin.addons.iConomyManager.hasEnough(this.plugin.config.settingsFile.costReceive, this.plugin.addons.iConomyManager.getHoldings(player.getName()))) {
@@ -35,7 +37,7 @@
 				}
 				if (payed) {
 					this.plugin.addons.msgFormat.formatAndSend("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costReceive) + " was subtracted from your account", player);
-				}
+				}*/
 				plugin.mmServer.getMail(player);
 			} else {
 				this.plugin.addons.msgFormat.formatAndSend("<header>MineMail - <c1>No Messages", player);
@@ -60,8 +62,10 @@
 			}
 			
 			//iConomy Support\\
-			
-			if (!this.plugin.isFree(player)) {
+			if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costSend)) {
+				return;
+			}
+			/*if (!this.plugin.isFree(player)) {
 				if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {
 					if (this.plugin.addons.iConomyManager.hasAccount(player) && this.plugin.addons.iConomyManager.hasValidAccount(player)) {
 						if (this.plugin.addons.iConomyManager.hasEnough(this.plugin.config.settingsFile.costSend, this.plugin.addons.iConomyManager.getHoldings(player.getName()))) {
@@ -73,7 +77,9 @@
 						this.plugin.addons.msgFormat.formatAndSend("<error>You do not have a valid iConomy Account", player);
 					}
 				}
-			}
+			}*/
+			
+			
 			
 			if (!this.plugin.addons.formatSQL.check(message)) {
 				message = this.plugin.addons.formatSQL.fix(message);
@@ -84,14 +90,10 @@
 				if (formatErrors) {
 					this.plugin.addons.msgFormat.formatAndSend("<c1>Your message has been sent, <error>but there were format errors.", player);
 					this.plugin.addons.msgFormat.formatAndSend("<error>Use /mail format to see what characters are not allowed", player);
-					if (payed) {
-						this.plugin.addons.msgFormat.formatAndSend("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costSend) + " was subtracted from your account", player);
-					}
+					
 				} else {
 					this.plugin.addons.msgFormat.formatAndSend("<c1>Your message has been sent", player);
-					if (payed) {
-						this.plugin.addons.msgFormat.formatAndSend("<header>MineMail <c1>- " + this.plugin.addons.iConomyManager.formatAmount(this.plugin.config.settingsFile.costSend) + " was subtracted from your account", player);
-					}
+					
 				}
 				plugin.notifyReceiver(receiver); 
 			

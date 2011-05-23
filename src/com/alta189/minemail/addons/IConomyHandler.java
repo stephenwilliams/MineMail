@@ -10,6 +10,7 @@ import com.iConomy.system.Holdings;
 
 public class IConomyHandler {
 	public MineMail plugin;
+	public IConomyFunctions functions = new IConomyFunctions(this);
 	
 	public IConomyHandler(MineMail instance) {
 		this.plugin = instance;
