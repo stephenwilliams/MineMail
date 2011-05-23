@@ -30,6 +30,7 @@ public class IConomyHandler {
 
 	    if(account != null) {
 	        // Yes the account is valid
+	    	// we need to think when we would need this and why, so we can add method.
 	    	return true;
 	    } else {
 	    	// No the account is not valid
