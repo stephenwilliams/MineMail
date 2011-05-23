@@ -91,7 +91,7 @@ public class MineMail extends JavaPlugin {
 
 	//Command Executer\\
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		Player player = (Player) sender;
+		Player player = (Player)sender;
 		if (commandLabel.equalsIgnoreCase("mail")) {
 			 if (args.length >= 1) {
 				 	if (args[0].equalsIgnoreCase("read") && player != null) {
@@ -120,10 +120,50 @@ public class MineMail extends JavaPlugin {
 				 		this.command.paper(player, cmd, commandLabel, args);
 				 	} else if (args[0].equalsIgnoreCase("format") && player != null) {
 				 		this.command.formatHelp(player, cmd, commandLabel, args);
-				 	}
+				 	} else {
+						 String[] newArgs = {"help"};
+						 this.command.help(player, cmd, commandLabel, newArgs);
+					 }
 			 } else {
-				 this.command.help(player, cmd, commandLabel, args);
+				 String[] newArgs = {"help"};
+				 this.command.help(player, cmd, commandLabel, newArgs);
 			 }
+		} else if (commandLabel.equalsIgnoreCase("mm")) {
+				 if (args.length >= 1) {
+					 	if (args[0].equalsIgnoreCase("read") && player != null) {
+					 		this.command.read(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("write") && player != null) {
+					 		if (args.length >= 3) {
+					 			this.command.write(player, cmd, commandLabel, args);
+					 		} else {
+					 			this.addons.msgFormat.formatAndSend("<help>/mm write <player name> <message>", player); 
+					 		}
+					 	} else if (args[0].equalsIgnoreCase("send") && player != null) {
+					 		if (args.length >= 3) {
+					 			this.command.write(player, cmd, commandLabel, args);
+					 		} else {
+					 			this.addons.msgFormat.formatAndSend("<help>/mm send <player name> <message>", player); 
+					 		}
+					 	} else if (args[0].equalsIgnoreCase("help") && player != null) {
+					 		this.command.help(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("admin") && player != null) {
+					 		this.command.admin(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("wipe") && player != null) {
+					 		this.command.wipe(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("reload") && player != null) {
+					 		this.command.reload(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("paper") && player != null) {
+					 		this.command.paper(player, cmd, commandLabel, args);
+					 	} else if (args[0].equalsIgnoreCase("format") && player != null) {
+					 		this.command.formatHelp(player, cmd, commandLabel, args);
+					 	} else {
+							 String[] newArgs = {"help"};
+							 this.command.help(player, cmd, commandLabel, newArgs);
+						 }
+				 } else {
+					 String[] newArgs = {"help"};
+					 this.command.help(player, cmd, commandLabel, newArgs);
+				 }
 		}
 		return false;
 	}

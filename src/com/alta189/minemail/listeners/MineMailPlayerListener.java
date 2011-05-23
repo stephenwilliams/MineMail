@@ -32,8 +32,10 @@ public class MineMailPlayerListener extends PlayerListener{
 		if (player.getItemInHand().getType().equals(Material.PAPER) && this.plugin.addons.managePaper.status(player.getName().toLowerCase())) {
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
 				if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
-					if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costReceive)) {
-						return;
+					if (this.plugin.config.settingsFile.iConomyEnabled) {
+						if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costReceive)) {
+							return;
+						}
 					}
 					plugin.mmServer.getMail(player);
 				} else {

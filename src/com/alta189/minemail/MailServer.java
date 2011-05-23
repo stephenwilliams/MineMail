@@ -3,7 +3,6 @@ package com.alta189.minemail;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class MailServer {
@@ -54,7 +53,7 @@ public class MailServer {
 				      String sender = result.getString("sender");
 				      String message = result.getString("message");
 				      this.setRead(result.getInt("id"));
-				      player.sendMessage(ChatColor.GREEN + "From: " + ChatColor.RED + sender + ChatColor.GREEN + " - " + ChatColor.RED + message);
+				      this.plugin.addons.msgFormat.formatAndSend("<c1>From: <c2>" + sender + " <c1>-<c2> " + message, player);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -81,7 +80,7 @@ public class MailServer {
 							plugin.dbManage.createTable(query1);
 						}
 						for (Player player : plugin.getServer().getOnlinePlayers()) {
-							player.sendMessage(ChatColor.GREEN + "MineMail - All messages have been wiped by Admin");
+							plugin.addons.msgFormat.formatAndSend("<header>MineMail <c1>- All messages have been wiped by Admin", player);
 						}
 					} else {
 						plugin.log.severe(plugin.logPrefix + "Could not wipe database.");
@@ -92,7 +91,7 @@ public class MailServer {
 	        }, plugin.DelayWipeTime * 20L);
 		
 		for (Player player : plugin.getServer().getOnlinePlayers()) {
-			player.sendMessage(ChatColor.GREEN + "MineMail - A wipe has been scheduled by an admin. Please read your messages within 1 minute!");
+			this.plugin.addons.msgFormat.formatAndSend("<header>MineMail <help>- A wipe has been scheduled by an admin. Please read your messages within 1 minute!", player);
 		}
 	
 	}

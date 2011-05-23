@@ -1,6 +1,6 @@
 package com.alta189.minemail.addons;
 
-import org.bukkit.ChatColor;
+
 import org.bukkit.entity.Player;
 import com.iConomy.system.Holdings;
 import com.alta189.minemail.addons.IConomyHandler;
@@ -13,7 +13,6 @@ public class IConomyFunctions {
 	}
 
 	public Boolean takeBalance(Player player, Double amount) {
-
 		if (instance.plugin.isFree(player)) {
 			//this.instance.plugin.addons.msgFormat.formatAndSend("<header>MineMail <c1>- You were not charged for this.", player);
 			//If player isFree then return true

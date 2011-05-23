@@ -17,8 +17,10 @@
 			if (plugin.mmServer.getUnreadCount(player.getName().toLowerCase()) >= 1) {
 				
 				//iConomy Support\\
-				if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costReceive)) {
-					return;
+				if (this.plugin.config.settingsFile.iConomyEnabled) {
+					if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costReceive)) {
+						return;
+					}
 				}
 				/*if (!this.plugin.isFree(player)) {
 					if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {
@@ -50,7 +52,6 @@
 			String message = "";
 			Integer count = 3;
 			Boolean formatErrors = false;
-			Boolean payed = false;
 
 			while (count <= args.length) {
 				if (count == 3) {
@@ -62,8 +63,10 @@
 			}
 			
 			//iConomy Support\\
-			if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costSend)) {
-				return;
+			if (this.plugin.config.settingsFile.iConomyEnabled) {
+				if (!this.plugin.addons.iConomyManager.functions.takeBalance(player, this.plugin.config.settingsFile.costSend)) {
+					return;
+				}
 			}
 			/*if (!this.plugin.isFree(player)) {
 				if (this.plugin.config.settingsFile.iConomyEnabled && this.plugin.iConomy != null) {

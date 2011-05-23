@@ -6,3 +6,6 @@ commands:
   mail:
     description: Some description here
     usage:
+  mm:
+    description: Some description here
+    usage:
